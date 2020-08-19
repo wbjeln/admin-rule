@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
     }]
   },
 
@@ -156,6 +156,29 @@ export const constantRoutes = [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
         meta: { title: 'External Link', icon: 'link' }
+      }
+    ]
+  },
+  {
+    path: '/menu',
+    component: Layout,
+    redirect: 'noRedirect',
+    meta: {
+      title: '文稿系统',
+      icon: 'form'
+    },
+    children: [
+      {
+        path: 'addMenu',
+        name: 'addMenu',
+        component: () => import('@/views/menu/addMenu/index'),
+        meta: { title: '添加文稿' }
+      },
+      {
+        path: 'menuList',
+        name: 'menuList',
+        component: () => import('@/views/menu/menuList/index'),
+        meta: { title: '文稿列表' }
       }
     ]
   },
