@@ -158,35 +158,44 @@ export const constantRoutes = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  },
+  }
+]
+
+export const asyncRoutes = [
   {
     path: '/menu',
     component: Layout,
     redirect: 'noRedirect',
+    name: 'Menu',
     meta: {
       title: '文稿系统',
-      icon: 'form'
+      icon: 'form',
+      roles: ['admin', 'editor']
     },
     children: [
       {
         path: 'addMenu',
-        name: 'addMenu',
+        name: 'AddMenu',
         component: () => import('@/views/menu/addMenu/index'),
-        meta: { title: '添加文稿' }
+        meta: { title: '添加文稿', roles: ['admin'] }
       },
       {
         path: 'menuList',
-        name: 'menuList',
+        name: 'MenuList',
         component: () => import('@/views/menu/menuList/index'),
-        meta: { title: '文稿列表' }
+        meta: { title: '文稿列表', roles: ['editor'] }
+      },
+      {
+        path: 'test',
+        name: 'Test',
+        component: () => import('@/views/menu/test/index'),
+        meta: { title: '测试' }
       }
     ]
   },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

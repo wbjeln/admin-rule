@@ -36,17 +36,17 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    proxy: {
-      '/': {
-        target: '',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: { // 路径重写，
-          '^/': '/'
-        }
-      }
-    }
-    // before: require('./mock/mock-server.js')
+    // proxy: {
+    //   '/': {
+    //     target: '',
+    //     ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: { // 路径重写，
+    //       '^/': '/'
+    //     }
+    //   }
+    // }
+    before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

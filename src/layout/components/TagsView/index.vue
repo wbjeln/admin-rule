@@ -43,11 +43,10 @@ export default {
   computed: {
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
+    },
+    routes() {
+      return this.$store.state.permission.routes
     }
-    // routes() {
-    //   return this.$store.state.permission.routes
-    //   // return this.$router.options.routes
-    // }
   },
   watch: {
     $route() {
@@ -75,25 +74,23 @@ export default {
     },
     filterAffixTags(routes, basePath = '/') {
       let tags = []
-      if (this.routes) {
-        routes.forEach(route => {
-          if (route.meta && route.meta.affix) {
-            const tagPath = path.resolve(basePath, route.path)
-            tags.push({
-              fullPath: tagPath,
-              path: tagPath,
-              name: route.name,
-              meta: { ...route.meta }
-            })
+      routes.forEach(route => {
+        if (route.meta && route.meta.affix) {
+          const tagPath = path.resolve(basePath, route.path)
+          tags.push({
+            fullPath: tagPath,
+            path: tagPath,
+            name: route.name,
+            meta: { ...route.meta }
+          })
+        }
+        if (route.children) {
+          const tempTags = this.filterAffixTags(route.children, route.path)
+          if (tempTags.length >= 1) {
+            tags = [...tags, ...tempTags]
           }
-          if (route.children) {
-            const tempTags = this.filterAffixTags(route.children, route.path)
-            if (tempTags.length >= 1) {
-              tags = [...tags, ...tempTags]
-            }
-          }
-        })
-      }
+        }
+      })
       return tags
     },
     initTags() {

@@ -1,12 +1,12 @@
 <template>
-  <div class="menuList">
-    dasd
+  <div class="test">
+    dasdadasdasd
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MenuList'
+  name: 'Test'
 }
 </script>
 
